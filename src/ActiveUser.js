@@ -9,7 +9,7 @@ class ActiveUser extends Component {
           <div className="col-md-6">
             <div className="thumbnail-caption">
               <table className="user-info table table-responsive">
-                <h3>Данные сотрудника</h3>
+                <caption>Данные сотрудника</caption>
                 <tbody>
                   <tr>
                     <td>ФИО:</td>
