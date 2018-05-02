@@ -4,7 +4,6 @@ const webpack = require('webpack')
 const path = require('path')
 
 module.exports = {
-  mode: 'development',
 
   entry: './src/root.js',
 
@@ -18,6 +17,21 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(scss)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
