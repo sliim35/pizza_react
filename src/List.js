@@ -79,7 +79,7 @@ class List extends Component {
               <tbody>
                 {this.props.employees.map((emp) => {
                   return(
-                    <tr key={emp.id}>
+                    <tr data-toggle="modal" data-target="#exampleModal" key={emp.id}>
                       <td>{emp.name}</td>
                       <td>
                         {this.roleRus(emp.role)}
