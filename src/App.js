@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import List from './List'
 import Filter from './Filter'
-import Addemployees from './Addemployees'
-import ActiveUser from './ActiveUser'
+import AddEmployee from './AddEmployee'
+import EditEmployee from './EditEmployee'
 
 class App extends Component {
 
@@ -90,8 +90,8 @@ class App extends Component {
           isArchived={ this.state.isArchived }
          />
         <List employees={ employees } update={ this.sorted } />
-        <Addemployees />
-        <ActiveUser />
+        <AddEmployee />
+        <EditEmployee />
       </div>
     )
   }

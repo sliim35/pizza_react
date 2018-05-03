@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Addemployees extends Component {
+class AddEmployee extends Component {
 
   render() {
     return (
@@ -15,4 +15,4 @@ class Addemployees extends Component {
   }
 }
 
-export default Addemployees
+export default AddEmployee
