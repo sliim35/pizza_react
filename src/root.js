@@ -8,6 +8,8 @@ import 'bootstrap'
 
 import App from './App'
 
+window.$ = $
+
 render(
   <App />,
   document.querySelector('#root')

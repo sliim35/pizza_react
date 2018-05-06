@@ -1,18 +1,34 @@
 import React, { Component } from 'react'
 
 class EditEmployee extends Component {
+  state = {
+    editMode: false
+  }
+
+  toggleMode = () => {
+    this.setState({
+      editMode: !this.state.editMode
+    })
+  }
 
   render() {
+    if (!this.props.selectedEmployeeData) return null
+
+    const { name, phone, role, birthday, isArchive } = this.props.selectedEmployeeData
+    const { rolesDictionary } = this.props
+    const { editMode } = this.state
+
     return (
-      <div className="modal fade" id="exampleModal" role="dialog">
-        <div className="modal-dialog modal-lg" role="document">
+      <div className="modal fade" id="exampleModal">
+        <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">Данные сотрудника</h5>
               <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <span>&times;</span>
               </button>
             </div>
+
             <div className="modal-body">
               <div className="thumbnail-caption">
                 <table className="user-info table table-hover">
@@ -20,55 +36,82 @@ class EditEmployee extends Component {
                     <tr>
                       <td>ФИО:</td>
                       <td className="user-desc">
-                        Илья Емельянов
-                        <button className="btn btn-outline-primary btn-sm ml40">
-                          <i className="fas fa-pencil-alt"></i> Редактировать
-                        </button>
+                        {editMode ? <input value={name} /> : name}
                       </td>
                     </tr>
+
                     <tr>
                       <td>Должность:</td>
                       <td className="user-desc">
-                        Водитель
-                        <button className="btn btn-outline-primary btn-sm ml40">
-                          <i className="fas fa-pencil-alt"></i> Редактировать
-                        </button>
+                        {editMode
+                          ? (
+                            <select>
+                              {Object.keys(rolesDictionary).map((role) => {
+                                return <option key={role}>{rolesDictionary[role]}</option>
+                              })}
+                            </select>
+                          )
+                          : rolesDictionary[role]
+                        }
                       </td>
                     </tr>
+
                     <tr>
                       <td>Телефон:</td>
                       <td className="user-desc">
-                        +7 (883) 508-3269
-                        <button className="btn btn-outline-primary btn-sm ml40">
-                          <i className="fas fa-pencil-alt"></i> Редактировать
-                        </button>
+                        {editMode ? <input value={phone} /> : phone}
                       </td>
                     </tr>
+
                     <tr>
                       <td>Дата рождения:</td>
                       <td className="user-desc">
-                        12.02.1982
-                        <button className="btn btn-outline-primary btn-sm ml40">
-                          <i className="fas fa-pencil-alt"></i> Редактировать
-                        </button>
+                        {editMode ? <input value={birthday} /> : birthday}
                       </td>
                     </tr>
+
                     <tr>
                       <td>В архиве:</td>
                       <td className="user-desc">
-                        Да
-                        <button className="btn btn-outline-primary btn-sm ml40">
-                          <i className="fas fa-pencil-alt"></i> Редактировать
-                        </button>
+                        {/*{isArchive ? 'Да' : 'Нет'}*/}
+                        {editMode
+                          ? (
+                            <input type="checkbox" checked={isArchive} />
+                          )
+                          : (
+                            <input type="checkbox" disabled="true" checked={isArchive} />
+                          )
+                          }
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-              <button type="button" className="btn btn-primary">Сохранить изменения</button>
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">
+                Закрыть
+              </button>
+
+            {editMode
+              ? (
+                <button
+                  type="button" className="btn btn-primary"
+                  onClick={this.toggleMode}
+                >
+                  Сохранить изменения
+                </button>
+              )
+              : (
+                <button
+                  type="button" className="btn btn-primary"
+                  onClick={this.toggleMode}
+                >
+                  Редактировать
+                </button>
+              )
+            }
             </div>
           </div>
         </div>

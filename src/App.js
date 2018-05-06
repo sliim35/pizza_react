@@ -13,12 +13,19 @@ class App extends Component {
     this.state = {
       employees: [],
       initialItems: [],
-      isArchived: false
+      isArchived: false,
+      selectedEmployeeData: 1,
+      rolesDictionary: {
+         cook: 'Повар',
+         driver: 'Водитель',
+         waiter: 'Официант'
+      }
     }
 
     this.filterEmployees = this.filterEmployees.bind(this)
     this.isArchived = this.isArchived.bind(this)
     this.sorted = this.sorted.bind(this)
+    this.showModalForSelectedEmployee = this.showModalForSelectedEmployee.bind(this)
   }
 
   componentWillMount() {
@@ -53,6 +60,12 @@ class App extends Component {
   //   })
   // }
 
+  showModalForSelectedEmployee(selectedId) {
+    this.setState({
+      selectedEmployeeData: this.state.initialItems[selectedId - 1]
+    })
+  }
+
   filterEmployees(filter) {
     var updatedList = this.state.initialItems.filter((emp) => {
       return emp.name.toLowerCase().match(filter)
@@ -72,14 +85,17 @@ class App extends Component {
   }
 
   render() {
+    let {
+      employees,
+      selectedEmployeeData,
+      rolesDictionary,
+      isArchived
+    } = this.state
 
-    let { employees } = this.state
-
-    if (this.state.isArchived) {
+    if (isArchived) {
       employees = employees.filter((emp) => {
         return !emp.isArchive
       })
-
     }
 
     return (
@@ -87,11 +103,21 @@ class App extends Component {
         <Filter
           onFilter={ this.filterEmployees }
           onArchived={ this.isArchived }
-          isArchived={ this.state.isArchived }
+          isArchived={ isArchived }
          />
-        <List employees={ employees } update={ this.sorted } />
+
+        <List
+          employees={ employees }
+          update={ this.sorted }
+          showModalForSelectedEmployee={this.showModalForSelectedEmployee}
+        />
+
         <AddEmployee />
-        <EditEmployee />
+
+        <EditEmployee
+          selectedEmployeeData={selectedEmployeeData}
+          rolesDictionary={rolesDictionary}
+        />
       </div>
     )
   }

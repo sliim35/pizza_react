@@ -8,6 +8,8 @@ class List extends Component {
       role: false,
       birthday: false
     }
+
+    // this.showModal = this.showModal.bind(this)
   }
 
   roleRus(role) {
@@ -71,6 +73,19 @@ class List extends Component {
     })
   }
 
+  showModal = (e) => {
+    // data-toggle="modal"
+    // data-target="#exampleModal"
+
+    // $('#myModal').on('hidden.bs.modal', function (e) {
+    //   // do something...
+    // })
+
+    this.props.showModalForSelectedEmployee(e.currentTarget.getAttribute('data-id'))
+
+    $('#exampleModal').modal()
+  }
+
   render() {
     return (
       <div className="container">
@@ -92,7 +107,11 @@ class List extends Component {
               <tbody>
                 {this.props.employees.map((emp) => {
                   return(
-                    <tr data-toggle="modal" data-target="#exampleModal" key={emp.id}>
+                    <tr
+                      onClick={this.showModal}
+                      key={emp.id}
+                      data-id={emp.id}
+                    >
                       <td>{emp.name}</td>
                       <td>
                         {this.roleRus(emp.role)}
