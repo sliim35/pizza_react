@@ -5,8 +5,8 @@ class List extends Component {
     super(props);
 
     this.sorted = {
-      role: true,
-      birthday: true
+      role: false,
+      birthday: false
     }
   }
 
@@ -31,6 +31,11 @@ class List extends Component {
     }
   }
 
+  convertToTS(dateStr) {
+    const date = dateStr.split('.')
+    return new Date(date[2] + '-' + date[1] + '-' + date[0]).getTime()
+  }
+
   sort(type) {
     // с помощью реструктуризации создаём две переменные
     const { update, employees } = this.props
@@ -45,8 +50,16 @@ class List extends Component {
       // чтобы сортировка всегда была одинаковой учтём все условия
       // функция может вернуть 0, 1 или -1, в зависимости от возвращаемого
       // значения метод массивов sort сделает свой выбор
-      if (a[type] === b[type]) { return 0; }
-      return a[type] > b[type] ? direction : direction * -1;
+      if (type === 'birthday') {
+        const aConverted = this.convertToTS(a[type])
+        const bConverted = this.convertToTS(b[type])
+
+        if (aConverted === bConverted) { return 0; }
+        return aConverted > bConverted ? direction : direction * -1;
+      } else {
+        if (a[type] === b[type]) { return 0; }
+        return a[type] > b[type] ? direction : direction * -1;
+      }
     })
 
     // меняем порядок сортировки
