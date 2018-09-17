@@ -1,14 +1,11 @@
 import { GET_EMPLOYEES } from './types';
+import axios from 'axios';
 
-export const getEployes = () => {
-  fetch('employees.json')
-    .then(res => {
-      return res.json();
-    })
-    .then(res => {
-      return {
-        type: GET_EMPLOYEES,
-        payload: res.data
-      };
-    });
+export const getEmployees = () => async dispatch => {
+  const res = await axios.get('../employees.json');
+
+  dispatch({
+    type: GET_EMPLOYEES,
+    payload: res.data
+  });
 };

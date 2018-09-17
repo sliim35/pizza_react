@@ -12,8 +12,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      employees: [],
-      initialItems: [],
       isArchived: false,
       selectedEmployeeData: 1,
       rolesDictionary: {
@@ -56,12 +54,7 @@ class App extends Component {
   }
 
   render() {
-    let {
-      employees,
-      selectedEmployeeData,
-      rolesDictionary,
-      isArchived
-    } = this.state;
+    let { selectedEmployeeData, rolesDictionary, isArchived } = this.state;
 
     if (isArchived) {
       employees = employees.filter(emp => {

@@ -102,37 +102,5 @@
     "role": "waiter",
     "phone": "+7 (951) 517-3787",
     "birthday": "16.12.1972"
-  },
-  {
-    "id": 14,
-    "name": "Пантелеймон Ефимов",
-    "isArchive": true,
-    "role": "cook",
-    "phone": "+7 (807) 492-3627",
-    "birthday": "17.04.1986"
-  },
-  {
-    "id": 15,
-    "name": "Иванна Калашникова",
-    "isArchive": true,
-    "role": "waiter",
-    "phone": "+7 (927) 488-2568",
-    "birthday": "24.03.1982"
-  },
-  {
-    "id": 16,
-    "name": "Прасковья Кондратьева",
-    "isArchive": true,
-    "role": "cook",
-    "phone": "+7 (875) 517-3873",
-    "birthday": "07.06.1983"
-  },
-  {
-    "id": 17,
-    "name": "Евдокия Филиппова",
-    "isArchive": false,
-    "role": "waiter",
-    "phone": "+7 (877) 450-3253",
-    "birthday": "03.12.1994"
   }
 ]
