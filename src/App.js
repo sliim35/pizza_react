@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react';
 
-import List from './List'
-import Filter from './Filter'
-import AddEmployee from './AddEmployee'
-import EditEmployee from './EditEmployee'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import List from './components/List';
+import Filter from './components/Filter';
+import AddEmployee from './components/AddEmployee';
+import EditEmployee from './components/EditEmployee';
 
 class App extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       employees: [],
@@ -16,69 +17,39 @@ class App extends Component {
       isArchived: false,
       selectedEmployeeData: 1,
       rolesDictionary: {
-         cook: 'Повар',
-         driver: 'Водитель',
-         waiter: 'Официант'
+        cook: 'Повар',
+        driver: 'Водитель',
+        waiter: 'Официант'
       }
-    }
+    };
 
-    this.filterEmployees = this.filterEmployees.bind(this)
-    this.isArchived = this.isArchived.bind(this)
-    this.sorted = this.sorted.bind(this)
-    this.showModalForSelectedEmployee = this.showModalForSelectedEmployee.bind(this)
+    this.filterEmployees = this.filterEmployees.bind(this);
+    this.isArchived = this.isArchived.bind(this);
+    this.sorted = this.sorted.bind(this);
+    this.showModalForSelectedEmployee = this.showModalForSelectedEmployee.bind(
+      this
+    );
   }
-
-  componentWillMount() {
-    fetch('employees.json')
-      .then((res) => {
-        return res.json()
-      })
-      .then((employees) => {
-        this.setState({
-          initialItems: employees,
-          employees
-        })
-      })
-  }
-
-  // componentDidMount() {
-  //   function loadFile() {
-  //     return new Promise((resolve) => {
-  //       const xhr = new XMLHttpRequest()
-  //
-  //       xhr.open('GET', 'employees.json')
-  //       xhr.send()
-  //       xhr.addEventListener('load', () => {
-  //         resolve()
-  //       })
-  //     })
-  //   }
-  //
-  //   loadFile()
-  //     .then(() => {
-  //
-  //   })
-  // }
 
   showModalForSelectedEmployee(selectedId) {
     this.setState({
       selectedEmployeeData: this.state.initialItems[selectedId - 1]
-    })
+    });
   }
 
   filterEmployees(filter) {
-    var updatedList = this.state.initialItems.filter((emp) => {
-      return emp.name.toLowerCase().match(filter)
-    })
-     this.setState({
-       employees: updatedList
-     })
+    var updatedList = this.state.initialItems.filter(emp => {
+      return emp.name.toLowerCase().match(filter);
+    });
+    this.setState({
+      employees: updatedList
+    });
   }
 
   isArchived(isArchived) {
     this.setState({
       isArchived
-    })
+    });
   }
   sorted(config) {
     this.setState(config);
@@ -90,38 +61,32 @@ class App extends Component {
       selectedEmployeeData,
       rolesDictionary,
       isArchived
-    } = this.state
+    } = this.state;
 
     if (isArchived) {
-      employees = employees.filter((emp) => {
-        return !emp.isArchive
-      })
+      employees = employees.filter(emp => {
+        return !emp.isArchive;
+      });
     }
 
     return (
-      <div>
-        <Filter
-          onFilter={ this.filterEmployees }
-          onArchived={ this.isArchived }
-          isArchived={ isArchived }
-         />
+      <Router>
+        <Fragment>
+          <Filter
+            onFilter={this.filterEmployees}
+            onArchived={this.isArchived}
+            isArchived={isArchived}
+          />
 
-        <List
-          employees={ employees }
-          update={ this.sorted }
-          showModalForSelectedEmployee={this.showModalForSelectedEmployee}
-        />
-
-        <AddEmployee />
-
-        <EditEmployee
-          selectedEmployeeData={selectedEmployeeData}
-          rolesDictionary={rolesDictionary}
-        />
-      </div>
-    )
+          <Switch>
+            <Route exact path="/" component={List} />
+            <Route exact path="/employee/add" component={AddEmployee} />
+            <Route exact path="/employee/edit/:id" component={EditEmployee} />
+          </Switch>
+        </Fragment>
+      </Router>
+    );
   }
-
 }
 
-export default App
+export default App;

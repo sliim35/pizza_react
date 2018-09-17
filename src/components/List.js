@@ -8,8 +8,6 @@ class List extends Component {
       role: false,
       birthday: false
     }
-
-    // this.showModal = this.showModal.bind(this)
   }
 
   roleRus(role) {
@@ -39,19 +37,11 @@ class List extends Component {
   }
 
   sort(type) {
-    // с помощью реструктуризации создаём две переменные
     const { update, employees } = this.props
-    // получаем порядок сортировки
     const isSorted = this.sorted[type]
-    // устанавливаем направление
     let direction = isSorted ? 1 : -1
 
-    // создаём новый массив из данных, чтобы не перезаписывать
-    // состояние и сортируем его
     const sorted = [].slice.call(employees).sort((a, b) => {
-      // чтобы сортировка всегда была одинаковой учтём все условия
-      // функция может вернуть 0, 1 или -1, в зависимости от возвращаемого
-      // значения метод массивов sort сделает свой выбор
       if (type === 'birthday') {
         const aConverted = this.convertToTS(a[type])
         const bConverted = this.convertToTS(b[type])
@@ -74,15 +64,7 @@ class List extends Component {
   }
 
   showModal = (e) => {
-    // data-toggle="modal"
-    // data-target="#exampleModal"
-
-    // $('#myModal').on('hidden.bs.modal', function (e) {
-    //   // do something...
-    // })
-
     this.props.showModalForSelectedEmployee(e.currentTarget.getAttribute('data-id'))
-
     $('#exampleModal').modal()
   }
 

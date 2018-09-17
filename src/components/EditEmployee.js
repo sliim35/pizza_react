@@ -79,7 +79,7 @@ class EditEmployee extends Component {
                             <input type="checkbox" checked={isArchive} />
                           )
                           : (
-                            <input type="checkbox" disabled="true" checked={isArchive} />
+                            <input type="checkbox" disabled checked={isArchive} />
                           )
                           }
                       </td>

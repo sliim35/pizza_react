@@ -1,16 +1,22 @@
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import { render } from 'react-dom';
 
-import './main.scss'
+import { Provider } from 'react-redux';
+import store from './store';
 
-import $ from 'jquery'
-import 'bootstrap'
+import './main.scss';
 
-import App from './App'
+import $ from 'jquery';
+import 'bootstrap';
 
-window.$ = $
+import App from './App';
+
+window.$ = $;
 
 render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
+
   document.querySelector('#root')
-)
+);
