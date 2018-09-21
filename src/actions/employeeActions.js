@@ -1,11 +1,25 @@
 import { GET_EMPLOYEES } from './types';
-import axios from 'axios';
+import { GET_EMPLOYEE } from './types';
+import { CHANGE_EMPLOYEE } from './types';
+import { employees } from '../employees';
 
-export const getEmployees = () => async dispatch => {
-  const res = await axios.get('../employees.json');
-
-  dispatch({
+export const getEmployees = () => {
+  return {
     type: GET_EMPLOYEES,
-    payload: res.data
-  });
+    payload: employees
+  };
+};
+
+export const saveEmployee = employee => {
+  return {
+    type: GET_EMPLOYEE,
+    payload: employee
+  };
+};
+
+export const changeEmployee = query => {
+  return {
+    type: CHANGE_EMPLOYEE,
+    payload: query
+  };
 };

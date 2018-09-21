@@ -1,23 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getSearchQuery } from '../actions/filterActions';
 
 class Filter extends Component {
-  constructor(props) {
-    super(props)
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleChangeCheckbox = this.handleChangeCheckbox.bind(this)
-  }
-
-  handleChange(e) {
-    this.props.onFilter(e.target.value.toLowerCase())
-  }
-
-  handleChangeCheckbox (e) {
-    this.props.onArchived(e.target.checked)
-  }
+  handleChange = e => {
+    this.props.getSearchQuery(e.target.value);
+  };
 
   render() {
-
     return (
       <div className="container mt100 mb30">
         <div className="row">
@@ -28,25 +18,17 @@ class Filter extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="col-md-3">
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                value=""
-                id="Archived"
-                checked={this.props.isArchived}
-                onChange={this.handleChangeCheckbox}
-               />
-              <label className="form-check-label" htmlFor="Archived">
-                Скрыть архивные должности
-              </label>
-            </div>
-          </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default Filter
+const mapStateToProps = state => ({
+  query: state.filter.query
+});
+
+export default connect(
+  mapStateToProps,
+  { getSearchQuery }
+)(Filter);

@@ -1,7 +1,10 @@
 import { GET_EMPLOYEES } from '../actions/types';
+import { GET_EMPLOYEE } from '../actions/types';
+import { CHANGE_EMPLOYEE } from '../actions/types';
 
 const initialState = {
-  employees: []
+  employees: [],
+  employee: {}
 };
 
 export default function(state = initialState, action) {
@@ -10,6 +13,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         employees: action.payload
+      };
+    case GET_EMPLOYEE:
+      return {
+        ...state,
+        employee: action.payload
+      };
+    case CHANGE_EMPLOYEE:
+      return {
+        ...state,
+        employees: state.employees.filter(emp =>
+          emp.name.toLowerCase().match(action.payload)
+        )
       };
     default:
       return state;

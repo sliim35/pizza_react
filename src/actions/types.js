@@ -1,1 +1,4 @@
 export const GET_EMPLOYEES = 'GET_EMPLOYEES';
+export const GET_EMPLOYEE = 'GET_EMPLOYEE';
+export const CHANGE_EMPLOYEE = 'CHANGE_EMPLOYEE';
+export const SEARCH_QUERY = 'SEARCH_QUERY';
