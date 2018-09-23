@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { changeEmployee, getEmployees } from '../actions/employeeActions';
 import { getSearchQuery } from '../actions/filterActions';
 
 class Filter extends Component {
   handleChange = e => {
-    this.props.getSearchQuery(e.target.value);
+    if (e.target.value) {
+      this.props.changeEmployee(e.target.value);
+      this.props.getSearchQuery(e.target.value);
+    } else {
+      this.props.getEmployees();
+    }
   };
 
   render() {
@@ -24,11 +30,7 @@ class Filter extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  query: state.filter.query
-});
-
 export default connect(
-  mapStateToProps,
-  { getSearchQuery }
+  null,
+  { changeEmployee, getEmployees, getSearchQuery }
 )(Filter);

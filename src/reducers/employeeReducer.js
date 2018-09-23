@@ -4,7 +4,8 @@ import { CHANGE_EMPLOYEE } from '../actions/types';
 
 const initialState = {
   employees: [],
-  employee: {}
+  employee: {},
+  filteredEmployees: []
 };
 
 export default function(state = initialState, action) {
@@ -20,11 +21,12 @@ export default function(state = initialState, action) {
         employee: action.payload
       };
     case CHANGE_EMPLOYEE:
+      const employees = state.employees.filter(emp =>
+        emp.name.includes(action.payload)
+      );
       return {
         ...state,
-        employees: state.employees.filter(emp =>
-          emp.name.toLowerCase().match(action.payload)
-        )
+        employees
       };
     default:
       return state;

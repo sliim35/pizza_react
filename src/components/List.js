@@ -2,24 +2,12 @@ import React, { Component, Fragment } from 'react';
 
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import {
-  getEmployees,
-  saveEmployee,
-  changeEmployee
-} from '../actions/employeeActions';
+import { getEmployees, saveEmployee } from '../actions/employeeActions';
 
 import Employee from './Employee';
 import Filter from './Filter';
 
 class List extends Component {
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const { query } = this.props;
-    console.log(query);
-    if (query !== nextProps.query) {
-      this.props.changeEmployee(query);
-    }
-  }
-
   componentDidMount() {
     this.props.getEmployees();
   }
@@ -70,6 +58,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { getEmployees, saveEmployee, changeEmployee }
+    { getEmployees, saveEmployee }
   )(List)
 );

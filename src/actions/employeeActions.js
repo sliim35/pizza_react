@@ -1,13 +1,14 @@
 import { GET_EMPLOYEES } from './types';
 import { GET_EMPLOYEE } from './types';
 import { CHANGE_EMPLOYEE } from './types';
-import { employees } from '../employees';
+import axios from 'axios';
 
-export const getEmployees = () => {
-  return {
+export const getEmployees = () => async dispatch => {
+  const res = await axios.get('../employees.json').then(res => res.data);
+  dispatch({
     type: GET_EMPLOYEES,
-    payload: employees
-  };
+    payload: res
+  });
 };
 
 export const saveEmployee = employee => {
