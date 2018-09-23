@@ -1,6 +1,6 @@
 import { GET_EMPLOYEES } from './types';
 import { GET_EMPLOYEE } from './types';
-import { CHANGE_EMPLOYEE } from './types';
+import { FILTER_EMPLOYEE } from './types';
 import axios from 'axios';
 
 export const getEmployees = () => async dispatch => {
@@ -18,9 +18,9 @@ export const saveEmployee = employee => {
   };
 };
 
-export const changeEmployee = query => {
+export const filterEmployee = query => {
   return {
-    type: CHANGE_EMPLOYEE,
+    type: FILTER_EMPLOYEE,
     payload: query
   };
 };

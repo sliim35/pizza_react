@@ -1,11 +1,11 @@
 import { GET_EMPLOYEES } from '../actions/types';
 import { GET_EMPLOYEE } from '../actions/types';
-import { CHANGE_EMPLOYEE } from '../actions/types';
+import { FILTER_EMPLOYEE } from '../actions/types';
 
 const initialState = {
   employees: [],
-  employee: {},
-  filteredEmployees: []
+  initialEmployees: [],
+  employee: {}
 };
 
 export default function(state = initialState, action) {
@@ -13,20 +13,20 @@ export default function(state = initialState, action) {
     case GET_EMPLOYEES:
       return {
         ...state,
-        employees: action.payload
+        employees: action.payload,
+        initialEmployees: action.payload
       };
     case GET_EMPLOYEE:
       return {
         ...state,
         employee: action.payload
       };
-    case CHANGE_EMPLOYEE:
-      const employees = state.employees.filter(emp =>
-        emp.name.includes(action.payload)
-      );
+    case FILTER_EMPLOYEE:
       return {
         ...state,
-        employees
+        employees: state.initialEmployees.filter(emp =>
+          emp.name.includes(action.payload)
+        )
       };
     default:
       return state;

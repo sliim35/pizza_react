@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeEmployee, getEmployees } from '../actions/employeeActions';
+import { filterEmployee, getEmployees } from '../actions/employeeActions';
 import { getSearchQuery } from '../actions/filterActions';
 
 class Filter extends Component {
   handleChange = e => {
     if (e.target.value) {
-      this.props.changeEmployee(e.target.value);
+      this.props.filterEmployee(e.target.value);
       this.props.getSearchQuery(e.target.value);
     } else {
       this.props.getEmployees();
@@ -32,5 +32,5 @@ class Filter extends Component {
 
 export default connect(
   null,
-  { changeEmployee, getEmployees, getSearchQuery }
+  { filterEmployee, getEmployees, getSearchQuery }
 )(Filter);
