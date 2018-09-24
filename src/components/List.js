@@ -10,6 +10,7 @@ import Filter from './Filter';
 class List extends Component {
   componentDidMount() {
     this.props.getEmployees();
+    console.log(this.props.employees);
   }
 
   render() {
@@ -55,9 +56,7 @@ const mapStateToProps = state => ({
   query: state.filter.state
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { getEmployees, saveEmployee }
-  )(List)
-);
+export default connect(
+  mapStateToProps,
+  { getEmployees, saveEmployee }
+)(List);

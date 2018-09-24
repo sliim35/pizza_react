@@ -7,8 +7,9 @@ import { roleRus } from '../helpers/rolesRus';
 import { saveEmployee } from '../actions/employeeActions';
 
 class Employee extends Component {
-  saveEmployeeContact = (name, role, phone, birthday) => {
+  saveEmployeeContact = (id, name, role, phone, birthday) => {
     const employee = {
+      id,
       name,
       role,
       phone,
@@ -28,9 +29,10 @@ class Employee extends Component {
         <td>{birthday}</td>
         <td>
           <Link
-            to={`edit/${name}`}
+            to={`edit/${id}`}
             onClick={this.saveEmployeeContact.bind(
               this,
+              id,
               name,
               role,
               phone,

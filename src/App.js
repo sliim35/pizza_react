@@ -14,8 +14,8 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/" component={List} />
-            <Route exact path="/add" component={AddEmployee} />
-            <Route exact path="/edit/:name" component={EditEmployee} />
+            <Route path="/add" component={AddEmployee} />
+            <Route path="/edit/:name" component={EditEmployee} />
           </Switch>
         </Router>
       </Provider>
